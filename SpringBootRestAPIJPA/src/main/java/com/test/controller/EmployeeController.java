@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.test.entity.Employee;
+import com.test.exceptions.EmployeeNotFoundException;
 import com.test.repository.EmployeeRepository;
 import com.test.service.EmployeeService;
 
@@ -46,7 +47,7 @@ public class EmployeeController {
 		}
 		else
 		{
-			return new ResponseEntity<>(eobj, HttpStatus.NO_CONTENT); 
+			return new ResponseEntity<>(eobj, HttpStatus.BAD_REQUEST); 
 		}
 	}
 	
@@ -62,7 +63,7 @@ public class EmployeeController {
 		}
 		else
 		{
-			return new ResponseEntity<>(list, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
 		}
 	}
 	@GetMapping("/{id}")
@@ -74,7 +75,7 @@ public class EmployeeController {
 			return new ResponseEntity<>(eobj,HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<>(eobj,HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(eobj,HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -88,7 +89,8 @@ public class EmployeeController {
 			return new ResponseEntity<>(eobj,HttpStatus.ACCEPTED);
 		}
 		else {
-			return new ResponseEntity<>(eobj,HttpStatus.BAD_REQUEST);
+			throw new EmployeeNotFoundException("NO_CONTENT_GIVEN");
+			//return new ResponseEntity<>(eobj,HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -101,7 +103,7 @@ public class EmployeeController {
 			return new ResponseEntity<>(list,HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<>(list,HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(list,HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -115,7 +117,7 @@ public class EmployeeController {
 			return new ResponseEntity<>(eobj,HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<>(eobj,HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(eobj,HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -129,7 +131,7 @@ public class EmployeeController {
 			return new ResponseEntity<>(list,HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<>(list,HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(list,HttpStatus.NOT_FOUND);
 		}
 	}
 	
@@ -142,8 +144,8 @@ public class EmployeeController {
 			return new ResponseEntity<>(list,HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<>(list,HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(list,HttpStatus.BAD_REQUEST);
 		}
 	}
 	
-}
+}                    
